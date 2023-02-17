@@ -1,7 +1,9 @@
 const express = require("express");
+
+//instantiate
 const app = express();
 
-app.use(express.json());
+//app.use(express.json());
 
 const birds = [
     { id: 1, name: "Pigeon" },
@@ -18,20 +20,22 @@ app.get("/", (req, res) => {
 });
 
 app.get("/birds", (req, res) => {
-    res.send({birds});
+    res.send({ "data": birds});
 });
 
 app.get("/birds/:Id", (req, res) => {
     const id = req.params.Id;
-    const bird = birds.find(bird => bird.id === (id));
+    const bird = birds.find(bird => bird.id === parseInt(id));
     res.send({bird});
 });
 
 app.get("/birds/name/:Name", (req, res) => {
     const name = req.params.Name;
     const bird = birds.find(bird => bird.name === (name));
-    res.send({bird});
+    res.send({ "data": bird});
 });
 
 
-app.listen(8080);
+app.listen(8080, () => {
+    console.log("Server is runnon on port", 8080);
+});
